@@ -1,5 +1,6 @@
 import tkinter as tk
 from subject import *
+from task import *
 
 window = tk.Tk()
 window.title("To Do")
@@ -7,16 +8,28 @@ window.geometry("600x600")
 bg_color = "#d794f0"
 window.configure(bg=bg_color)
 
-# PLACEHOLDER: make function for user entry for sub & task ############
-subjects = []
 tasks = []
-for i in range(1, 4):
-    subjects.append(Subject(f"Subject {i}"))
-    tasks.append(Subject(f"Task {i}"))
 
-names = []
-for s in subjects:
-    names.append(tk.Label(window, text=s.name).pack())
+# PLACEHOLDER: make function for user entry for task ############
+def get_names(t):
+    for task in t:
+        tk.Label(window, text=task.name).pack()
+
+def add_task(n):
+    t = Task(n)
+    tasks.append(t)
+    tk.Label(window, text=t.name).pack()
+
+name_entry = tk.Entry(window)
+name_entry.pack()
+tk.Button(window, text="Add Task", command=lambda: add_task(name_entry.get())).pack()
+
+# tasks = generate_tasks()
+get_names(tasks)
+
+
+
 ######################################################################
+
 
 window.mainloop()
